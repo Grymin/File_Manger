@@ -5,47 +5,12 @@ import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
 
-"""
-size
-To get the size of a directory, you'll have to walk the whole directory tree and add size of each file. To do this you can use the os.walk() and os.path.getsize() functions.
 
-For example
-import os
-total_size = 0
-start_path = '.'  # To get size of current directory
-for path, dirs, files in os.walk(start_path):
-    for f in files:
-        fp = os.path.join(path, f)
-        total_size += os.path.getsize(fp)
-print("Directory size: " + str(total_size))
+class FileManager:
+    """
+    TKinter app to manage files
+    """
 
-___
-
-import os
-
-def get_size(start_path = '.'):
-    total_size = 0
-    for dirpath, dirnames, filenames in os.walk(start_path):
-        for f in filenames:
-            fp = os.path.join(dirpath, f)
-            # skip if it is symbolic link
-            if not os.path.islink(fp):
-                total_size += os.path.getsize(fp)
-
-    return total_size
-
-print(get_size(), 'bytes')
-
-____
-from pathlib import Path
-
-root_directory = Path('.')
-sum(f.stat().st_size for f in root_directory.glob('**/*') if f.is_file())
-
-"""
-
-
-class Box:
     def __init__(self):
 
         # Chosen file information
@@ -81,7 +46,6 @@ class Box:
         self.root.mainloop()
 
     def choose_file(self):
-        """Chooses file and sets names"""
         self.fpath = easygui.fileopenbox()
         self.fname = os.path.basename(self.fpath)
         self.path = os.path.dirname(self.fpath)
@@ -140,4 +104,4 @@ class Box:
         os.rmdir(os.path.join(dest, dest))
         tk.messagebox.showinfo('SUCCESS', "Direction deleted")
 
-a = Box()
+a = FileManager()
